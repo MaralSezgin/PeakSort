@@ -9,6 +9,7 @@ namespace PeakSort.Entities.Concrete
 {
     public class About : EntityBase, IEntity
     {
+        public int GITDENEME { get; set; }
         public int ID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
