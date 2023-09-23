@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PeakSort.Core\PeakSort.Core.csproj" />
+    <ProjectReference Include="..\PeakSort.DataAccess\PeakSort.DataAccess.csproj" />
+    <ProjectReference Include="..\PeakSort.Entities\PeakSort.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
