@@ -31,8 +31,15 @@ namespace PeakSort.Entities.Dtos
         [MinLength(3, ErrorMessage = "{0} {1} karakterden az olmamalıdır.")]
         public string Note { get; set; }
 
+
+        [DisplayName("Tarih")]
+        [Required(ErrorMessage = "{0} alanı boş geçilmemelidir")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime date { get; set; }
+
         [DisplayName("Aktif mi?")]
         [Required(ErrorMessage = "{0} boş geçilmemelidir.")]
         public bool IsActive { get; set; }
+       
     }
 }

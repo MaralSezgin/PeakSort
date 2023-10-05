@@ -12,8 +12,8 @@ namespace PeakSort.Business.Abstract
 {
     public interface ICategoryService
     {
-        public Task<DataResult<Category>> Get(int categoryId);
-        public Task<DataResult<IList<Category>>> GelAll();
+        public Task<DataResult<CategoryDto>> Get(int categoryId);
+        public Task<DataResult<CategoryListDto>> GelAll();
 
         public Task<IResult> Add(CategoryAddDto categoryAddDto, string createdByName);
         public Task<IResult> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName);
