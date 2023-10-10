@@ -1,0 +1,89 @@
+﻿@using PeakSort.Core.Utilities.ComplexType
+@model PeakSort.Entities.Dtos.CategoryListDto
+@{
+    ViewBag.Title = "Kategory Index";
+    Layout = "_Layout";
+}
+@if (Model.ResultStatus == ResultStatus.Success)
+{
+    <div class="card mb-4 mt-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+           Kategoriler
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Kategori</th>
+                            <th>Açıklama</th>
+                            <th>Not</th>
+                            <th>Aktif mi?</th>
+                            <th>Oluşturulma Tarihi</th>
+                            <th>Güncelleme Tarihi date</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Kategori</th>
+                            <th>Açıklama</th>
+                            <th>Not</th>
+                            <th>Oluşturulma Tarihi</th>
+                            <th>Güncelleme Tarihi date</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <td>@category.CategoryID</td>
+                                <td>@category.CategoryName</td>
+                                <td>@category.Description</td>
+                                <td>@category.Note</td>
+                                <td>@category.IsActive</td>
+                                <td>@category.CreatedDate.ToShortDateString()</td>
+                                <td>@category.ModifiedDate.ToShortDateString()</td>
+                            }
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#categoriesTable').DataTable({
+                dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                buttons: [
+                    {
+                        text: 'Ekle',
+                        className:'btn btn-success',
+                        action: function (e, dt, node, config) {
+                            alert('Button activated');
+                        }
+                    },
+                    {
+                        text: 'Yenile',
+                        className:'btn btn-warning',
+                        action: function (e, dt, node, config) {
+                            alert('Yenile');
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+}
+}
