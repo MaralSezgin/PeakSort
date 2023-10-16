@@ -6,6 +6,7 @@
 }
 @if (Model.ResultStatus == ResultStatus.Success)
 {
+    <div id="modelPlaceHolder" aria-hidden="true"></div>
     <div class="card mb-4 mt-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
@@ -37,20 +38,22 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr>
-                            @foreach (var category in Model.Categories)
-                            {
-                                <td>@category.CategoryID</td>
-                                <td>@category.CategoryName</td>
-                                <td>@category.Description</td>
-                                <td>@category.Note</td>
-                                <td>@category.IsActive</td>
-                                <td>@category.CreatedDate.ToShortDateString()</td>
-                                <td>@category.ModifiedDate.ToShortDateString()</td>
-                            }
 
+                        @foreach (var category in Model.Categories)
+                        {
+                        <tr>
+                            <td>@category.CategoryID</td>
+                            <td>@category.CategoryName</td>
+                            <td>@category.Description</td>
+                            <td>@category.Note</td>
+                            <td>@category.IsActive</td>
+                            <td>@category.CreatedDate.ToShortDateString()</td>
+                            <td>@category.ModifiedDate.ToShortDateString()</td>
                         </tr>
-                    </tbody>
+                          }
+
+                         
+                        </tbody>
                 </table>
             </div>
         </div>
@@ -69,9 +72,12 @@
                 buttons: [
                     {
                         text: 'Ekle',
+                        attr: {
+                            id:"btnAdd",
+                        },
                         className:'btn btn-success',
                         action: function (e, dt, node, config) {
-                            alert('Button activated');
+                       
                         }
                     },
                     {
@@ -83,7 +89,64 @@
                     }
                 ]
             });
+            @*dataTable burada bitiyor*@
+
         });
+        $(function () {
+
+            const placeHolder = $('#modelPlaceHolder');
+            const url = '@Url.Action("Add","Category")';
+          
+            $('#btnAdd').click(function () {
+                $.get(url).done(function (data) {
+                    placeHolder.html(data);
+                    placeHolder.find(".modal").modal('show');
+                })
+            });
+
+            placeHolder.on('click', '#btnSave',
+                function (event) {
+                    event.preventDefault();
+                    
+                    const form = $('#form-category-add');
+                   
+                    const urlAction = form.attr('action');
+                    const dataSend = form.serialize();
+                 
+                    console.log(dataSend);
+                    $.post(urlAction, dataSend).done(function (data) {
+
+                        const categoryAddAjaxModel = jQuery.parseJSON(data);
+                        console.log(categoryAddAjaxModel);
+                        const newFormBody = $('.modal-body', categoryAddAjaxModel.CategoryAddPartial);
+                        placeHolder.find('.modal-body').replaceWith(newFormBody);
+                 
+                        const isValid = newFormBody.find('[name="IsValid"]').val() === 'True';
+                        
+                        if (isValid) {
+                            placeHolder.find('.modal').modal('hide');
+                            
+                            const newTableRow = `
+                          <tr>
+                           <td>${categoryAddAjaxModel.CategoryDto.Category.CategoryID}<td>
+                           <td>${categoryAddAjaxModel.CategoryDto.Category.CategoryName}<td>
+                           <td>${categoryAddAjaxModel.CategoryDto.Category.Description}<td>
+                         
+                         <tr>`
+                            
+                            const newTableObject = $(newTableRow);
+                            newTableObject.hide();
+                            $('#categoriesTable').append(newTableObject);
+                            newTableObject.fadeIn(3000);
+                            toastr.success('${categoryAddAjaxModel.CategoryDto.Category.Message}', 'Başarılı');
+                         
+                        }
+                
+
+                    });
+            });
+
+        })
     </script>
 }
 }

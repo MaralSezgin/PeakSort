@@ -9,8 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-
-
+using PeakSort.Business.AutoMapper.Profiles;
 
 namespace PeakSort.MVCWebUI
 {
@@ -22,7 +21,7 @@ namespace PeakSort.MVCWebUI
         {
            
             services.AddControllersWithViews().AddRazorRuntimeCompilation();//sen bir mvc uygulamasý olarak çalýþmalaýsýn
-            services.AddAutoMapper(typeof(Startup));//Automapper kullanmalarýzý düzenler derlenme sýrasýnda
+            services.AddAutoMapper(typeof(CategoryProfile),typeof(ProductProfile));//Automapper kullanmalarýzý düzenler derlenme sýrasýnda
             services.LoadServices();//bu servisleri biz yazdýk
         }
 

@@ -10,4 +10,5 @@ namespace PeakSort.Core.Utilities.Results.Abstract
     {
         public T Data { get; }
     }
+  
 }

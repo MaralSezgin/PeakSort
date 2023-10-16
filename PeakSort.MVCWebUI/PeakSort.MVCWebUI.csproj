@@ -11,10 +11,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PeakSort.Business\PeakSort.Business.csproj" />
+    <ProjectReference Include="..\PeakSort.Core\PeakSort.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
 

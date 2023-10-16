@@ -26,15 +26,7 @@ namespace PeakSort.Business.Concrete
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IResult> Add(CategoryAddDto categoryAddDto, string createdByName)
-        {
-            var category = _mapper.Map<Category>(categoryAddDto);
-
-           await _unitOfWork.Categorys.AddAsync(category).ContinueWith(x => _unitOfWork.SaveAsync());
-
-            return new Result(ResultStatus.Success, $"{category.CategoryName} adlı kategory başayıyla eklenmiştir");
-
-        }
+  
 
         public async Task<IResult> Delete(int categoryId)
         {
@@ -91,12 +83,30 @@ namespace PeakSort.Business.Concrete
             }
             return new Result(ResultStatus.Error, "kategori bulunamadı");
         }
+        public async Task<DataResult<CategoryDto>> Add(CategoryAddDto categoryAddDto, string createdByName)
+        {
+            var category = _mapper.Map<Category>(categoryAddDto);
 
-        public async Task<IResult> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName)
+            var addedcategory = await _unitOfWork.Categorys.AddAsync(category);
+            addedcategory.CreatedByName = createdByName;
+            addedcategory.ModifiedByName = createdByName;
+            await _unitOfWork.SaveAsync();
+
+            return new DataResult<CategoryDto>(ResultStatus.Success, $"{category.CategoryName} adlı kategory başayıyla eklenmiştir", new CategoryDto
+            {
+                Category = addedcategory,
+                ResultStatus = ResultStatus.Success,
+                Message = $"{addedcategory.CategoryName} adlı kategory başayıyla eklenmiştir"
+
+
+            }); ;
+
+        }
+
+        public async Task<DataResult<CategoryDto>> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName)
         {
             var category = await _unitOfWork.Categorys.GetAsync(x => x.CategoryID == categoryUpdateDto.ID);
-            if (category!=null)
-            {
+          
                 category.CategoryName = categoryUpdateDto.CategoryName;
                 category.Description = categoryUpdateDto.Description;
                 category.Note = categoryUpdateDto.Note;
@@ -104,11 +114,19 @@ namespace PeakSort.Business.Concrete
                 category.ModifiedByName = categoryUpdateDto.CategoryName;
                 category.ModifiedDate = categoryUpdateDto.date;
 
-                await _unitOfWork.Categorys.UpdateAsync(category).ContinueWith(x => _unitOfWork.SaveAsync());
-                return new Result(ResultStatus.Success, $"{category.CategoryName} isimli kategori başarıyla güncellenmiştir");
+                var updateCategory = await _unitOfWork.Categorys.UpdateAsync(category);
+                await _unitOfWork.SaveAsync();
+                return new DataResult<CategoryDto>(ResultStatus.Success, $"{category.CategoryName} isimli kategori başarıyla güncellenmiştir", new CategoryDto
+                {
+                    Category = updateCategory,
+                    ResultStatus = ResultStatus.Success,
+                    Message=$"{updateCategory.CategoryName} adlı kategori başarıyla güncellenmiştir",
 
-            }
-            return new Result(ResultStatus.Error, "kategori bulunamadı");
+                });
+                
+
+            
+
         }
     }
 }

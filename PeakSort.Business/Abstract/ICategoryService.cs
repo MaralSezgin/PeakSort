@@ -15,8 +15,8 @@ namespace PeakSort.Business.Abstract
         public Task<DataResult<CategoryDto>> Get(int categoryId);
         public Task<DataResult<CategoryListDto>> GelAll();
 
-        public Task<IResult> Add(CategoryAddDto categoryAddDto, string createdByName);
-        public Task<IResult> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName);
+        public Task<DataResult<CategoryDto>> Add(CategoryAddDto categoryAddDto, string createdByName);
+        public Task<DataResult<CategoryDto>> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName);
         public Task<IResult> Delete(int categoryId);
         public Task<IResult> HardDelete(int categoryId);
     }
