@@ -14,8 +14,7 @@ namespace PeakSort.DataAccess.Abstract
         IProductRepository Products { get; }
         IProjectRepository Projects { get; }
         IReferenceRepository References { get; }
-        IRoleRepository Roles { get; }
-        IUserRepository Users { get; }
+
 
         Task<int> SaveAsync();
     }

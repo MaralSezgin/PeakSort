@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PeakSort.DataAccess.Concrete.EntityFramework.Mappings;
 using PeakSort.Entities.Concrete;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PeakSort.DataAccess.Concrete.EntityFramework.Contexts
 {
-    public class PeaksortContext:DbContext
+    public class PeaksortContext:IdentityDbContext<User,Role,int,UserClaim,UserRole,UserLogin,RoleClaim,UserToken>//int primary key int
     {
         public  DbSet<About> Abouts  { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -33,7 +34,12 @@ namespace PeakSort.DataAccess.Concrete.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new ReferenceMap());
             modelBuilder.ApplyConfiguration(new RoleMap());
             modelBuilder.ApplyConfiguration(new UserMap());
-          
+            modelBuilder.ApplyConfiguration(new UserClaimMap());
+            modelBuilder.ApplyConfiguration(new UserRoleMap());
+            modelBuilder.ApplyConfiguration(new UserLoginMap());
+            modelBuilder.ApplyConfiguration(new RoleClaimMap());
+            modelBuilder.ApplyConfiguration(new UserTokenMap());
+
         }
     }
 }

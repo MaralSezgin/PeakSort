@@ -22,6 +22,8 @@ namespace PeakSort.MVCWebUI
            
             services.AddControllersWithViews().AddRazorRuntimeCompilation();//sen bir mvc uygulaması olarak çalışmalaısın
             services.AddAutoMapper(typeof(CategoryProfile),typeof(ProductProfile));//Automapper kullanmalarızı düzenler derlenme sırasında
+
+            services.AddSession();
             services.LoadServices();//bu servisleri biz yazdık
         }
 
@@ -35,8 +37,15 @@ namespace PeakSort.MVCWebUI
 
             }
 
+            app.UseSession();//UseAuthentication session kullanıyor o yüzden ilk ekledik
+
             app.UseStaticFiles();//statik file kullanımı söylüyoruzörnegin resim dosyası
             app.UseRouting();
+
+
+            //UseRouting() den sonra yazmamız kullanıcı gitmek istedigi yere yonlendiriliyor sonra UseAuthentication() giriyior
+            app.UseAuthentication();//kimlik konrolu
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>//herhanbi bir istek gelince buraya girer
             {

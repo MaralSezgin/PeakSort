@@ -6,147 +6,96 @@
 }
 @if (Model.ResultStatus == ResultStatus.Success)
 {
-    <div id="modelPlaceHolder" aria-hidden="true"></div>
-    <div class="card mb-4 mt-4">
-        <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-           Kategoriler
+<div id="modelPlaceHolder" aria-hidden="true"></div>
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Kategoriler
+    </div>
+    <div class="card-body">
+        <div class="spinner-border" role="status" style="display:none">
+            <span class="sr-only">Yükleniyor...</span>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Kategori</th>
-                            <th>Açıklama</th>
-                            <th>Not</th>
-                            <th>Aktif mi?</th>
-                            <th>Oluşturulma Tarihi</th>
-                            <th>Güncelleme Tarihi date</th>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Kategori</th>
+                        <th>Açıklama</th>
+                        <th>Not</th>
+                        <th>Aktif mi?</th>
+                        <th>Oluşturan</th>
+                        <th>Güncelleyen</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Güncelleme Tarihi</th>
+                        <th>İşlemler</th>
 
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Kategori</th>
-                            <th>Açıklama</th>
-                            <th>Not</th>
-                            <th>Oluşturulma Tarihi</th>
-                            <th>Güncelleme Tarihi date</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Kategori</th>
+                        <th>Açıklama</th>
+                        <th>Not</th>
+                        <th>Aktif mi?</th>
+                        <th>Oluşturan</th>
+                        <th>Güncelleyen</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Güncelleme Tarihi</th>
+                        <th>İşlemler</th>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
 
-                        @foreach (var category in Model.Categories)
-                        {
-                        <tr>
-                            <td>@category.CategoryID</td>
-                            <td>@category.CategoryName</td>
-                            <td>@category.Description</td>
-                            <td>@category.Note</td>
-                            <td>@category.IsActive</td>
-                            <td>@category.CreatedDate.ToShortDateString()</td>
-                            <td>@category.ModifiedDate.ToShortDateString()</td>
-                        </tr>
-                          }
+                    @foreach (var category in Model.Categories)
+                    {
+                    <tr name="@category.CategoryID">
+                        <td>@category.CategoryID</td>
+                        <td>@category.CategoryName</td>
+                        <td>@category.Description</td>
+                        <td>@category.Note</td>
+                        <td>@category.IsActive</td>
+                        <td>@category.CreatedByName</td>
+                        <td>@category.ModifiedByName</td>
+                        <td>@category.CreatedDate.ToShortDateString()</td>
+                        <td>@category.ModifiedDate.ToShortDateString()</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm btn-delete" data-id="@category.CategoryID"><span class="fas fa-minus-circle"></span></button>
+                            <button class="btn btn-primary btn-sm btn-update" data-id="@category.CategoryID"><span class="fas fa-edit "></span></button>
+                        </td>
 
-                         
-                        </tbody>
-                </table>
-            </div>
+                    </tr>
+                    }
+
+
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
 @section Scripts
 {
-    <script>
-        $(document).ready(function () {
-            $('#categoriesTable').DataTable({
-                dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-                buttons: [
-                    {
-                        text: 'Ekle',
-                        attr: {
-                            id:"btnAdd",
-                        },
-                        className:'btn btn-success',
-                        action: function (e, dt, node, config) {
-                       
-                        }
-                    },
-                    {
-                        text: 'Yenile',
-                        className:'btn btn-warning',
-                        action: function (e, dt, node, config) {
-                            alert('Yenile');
-                        }
-                    }
-                ]
-            });
-            @*dataTable burada bitiyor*@
+    <script src="~/js/categoryIndex.js" type="application/ecmascript"></script>
+ }
 
-        });
-        $(function () {
 
-            const placeHolder = $('#modelPlaceHolder');
-            const url = '@Url.Action("Add","Category")';
-          
-            $('#btnAdd').click(function () {
-                $.get(url).done(function (data) {
-                    placeHolder.html(data);
-                    placeHolder.find(".modal").modal('show');
-                })
-            });
 
-            placeHolder.on('click', '#btnSave',
-                function (event) {
-                    event.preventDefault();
-                    
-                    const form = $('#form-category-add');
-                   
-                    const urlAction = form.attr('action');
-                    const dataSend = form.serialize();
-                 
-                    console.log(dataSend);
-                    $.post(urlAction, dataSend).done(function (data) {
 
-                        const categoryAddAjaxModel = jQuery.parseJSON(data);
-                        console.log(categoryAddAjaxModel);
-                        const newFormBody = $('.modal-body', categoryAddAjaxModel.CategoryAddPartial);
-                        placeHolder.find('.modal-body').replaceWith(newFormBody);
-                 
-                        const isValid = newFormBody.find('[name="IsValid"]').val() === 'True';
-                        
-                        if (isValid) {
-                            placeHolder.find('.modal').modal('hide');
-                            
-                            const newTableRow = `
-                          <tr>
-                           <td>${categoryAddAjaxModel.CategoryDto.Category.CategoryID}<td>
-                           <td>${categoryAddAjaxModel.CategoryDto.Category.CategoryName}<td>
-                           <td>${categoryAddAjaxModel.CategoryDto.Category.Description}<td>
-                         
-                         <tr>`
-                            
-                            const newTableObject = $(newTableRow);
-                            newTableObject.hide();
-                            $('#categoriesTable').append(newTableObject);
-                            newTableObject.fadeIn(3000);
-                            toastr.success('${categoryAddAjaxModel.CategoryDto.Category.Message}', 'Başarılı');
-                         
-                        }
-                
-
-                    });
-            });
-
-        })
-    </script>
-}
-}

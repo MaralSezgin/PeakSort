@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PeakSort.MVCWebUI.Areas.Admin.Controllers
@@ -58,10 +59,63 @@ namespace PeakSort.MVCWebUI.Areas.Admin.Controllers
             });
 
             return Json(categoryAjaxErrorModel);
-       
-        
-          
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(CategoryUpdateDto categoryUpdateDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _categoryService.Update(categoryUpdateDto, "Sezgin MARAL");
+                if (result.ResultStatus == ResultStatus.Success)
+                {
+                    var categoryUpdateAjaxModel = JsonSerializer.Serialize(new CategoryUpdateAjaxViewModel
+                    {
+                        CategoryDto = result.Data,
+                        CategoryUpdatePartial = await this.RenderViewToStringAsync("_CategoryUpdatePartial", categoryUpdateDto),
+                    });
+                    return Json(categoryUpdateAjaxModel);
+                }
+            }
+            var categoryAjaxErrorModel = JsonSerializer.Serialize(new CategoryUpdateAjaxViewModel
+            {
+                CategoryUpdatePartial = await this.RenderViewToStringAsync("_CategoryUpdatePartial", categoryUpdateDto),
+            });
+
+            return Json(categoryAjaxErrorModel);
+                
+        }
+
+
+        public async Task<JsonResult> GelAllCategories()
+        {
+            var result = await _categoryService.GelAll();
+                var categories=JsonSerializer.Serialize(result.Data,new JsonSerializerOptions
+                {
+                     ReferenceHandler= ReferenceHandler.Preserve
+                });
+            return Json( categories);
+        }
+        public async Task<JsonResult> Delete(int categoryId)
+        {
+           var result=await _categoryService.Delete(categoryId);
+            var ajaxResult = JsonSerializer.Serialize(result);
+            return Json(ajaxResult);
+        }
+
+      
+        [HttpGet]
+        public async Task<IActionResult> Update(int categoryId)
+        {
+            var result = await _categoryService.GetCategoryUpdateDto(categoryId);
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                var a= PartialView("_CategoryUpdatePartial", result.Data);
+                return a;
+            }
+            else
+                return NotFound();
         }
     }
 }

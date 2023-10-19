@@ -15,6 +15,7 @@ namespace PeakSort.Business.AutoMapper.Profiles
         {
             CreateMap<CategoryAddDto, Category>();
             CreateMap<CategoryUpdateDto, Category>();
+            CreateMap<Category, CategoryUpdateDto>();
 
         }
     }

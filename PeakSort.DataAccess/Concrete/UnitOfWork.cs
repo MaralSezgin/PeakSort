@@ -19,8 +19,7 @@ namespace PeakSort.DataAccess.Concrete
         private EfProductRepository _productRepository;
         private EfProjectRepository _projectRepository;
         private EfReferenceRepository _referenceRepository;
-        private EfRoleRepository _roleRepository;
-        private EfUserRepository _userRepository;
+
         public UnitOfWork(PeaksortContext context)
         {
             _context = context;
@@ -37,9 +36,7 @@ namespace PeakSort.DataAccess.Concrete
 
         public IReferenceRepository References => _referenceRepository ?? new EfReferenceRepository(_context);
 
-        public IRoleRepository Roles => _roleRepository ?? new EfRoleRepository(_context);
 
-        public IUserRepository Users => _userRepository  ?? new EfUserRepository(_context);
 
         public async ValueTask DisposeAsync()
         {

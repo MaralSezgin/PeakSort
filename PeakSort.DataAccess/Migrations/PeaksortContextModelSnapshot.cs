@@ -38,6 +38,9 @@ namespace PeakSort.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR(MAX)");
 
+                    b.Property<int>("GITDENEME")
+                        .HasColumnType("int");
+
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -79,13 +82,14 @@ namespace PeakSort.DataAccess.Migrations
                         {
                             ID = 1,
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 9, 21, 11, 24, 23, 703, DateTimeKind.Local).AddTicks(8989),
+                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 237, DateTimeKind.Local).AddTicks(279),
                             Description = "About Description",
+                            GITDENEME = 0,
                             Image = "Default.jpg",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 9, 21, 11, 24, 23, 703, DateTimeKind.Local).AddTicks(9418),
+                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 237, DateTimeKind.Local).AddTicks(1014),
                             Note = "Note deneme",
                             Title = "About Title",
                             VideoLink = "deneme"
@@ -144,12 +148,12 @@ namespace PeakSort.DataAccess.Migrations
                             CategoryID = 1,
                             CategoryName = "Deneme1",
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 9, 21, 11, 24, 23, 707, DateTimeKind.Local).AddTicks(1752),
+                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 243, DateTimeKind.Local).AddTicks(6071),
                             Description = "category Description",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 9, 21, 11, 24, 23, 707, DateTimeKind.Local).AddTicks(1768),
+                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 243, DateTimeKind.Local).AddTicks(6105),
                             Note = "Note deneme"
                         });
                 });
@@ -234,7 +238,7 @@ namespace PeakSort.DataAccess.Migrations
                             Address = "Deneme1",
                             Address1 = "Deneme1",
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 9, 21, 11, 24, 23, 710, DateTimeKind.Local).AddTicks(1406),
+                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 252, DateTimeKind.Local).AddTicks(7275),
                             Email = "Deneme1",
                             Fax = "Deneme1",
                             Image = "Deneme1",
@@ -244,7 +248,7 @@ namespace PeakSort.DataAccess.Migrations
                             MobilePhone = "Deneme1",
                             MobilePhone1 = "Deneme1",
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 9, 21, 11, 24, 23, 710, DateTimeKind.Local).AddTicks(1430),
+                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 252, DateTimeKind.Local).AddTicks(7329),
                             Note = "Note deneme",
                             Phone = "Deneme1"
                         });
@@ -326,18 +330,18 @@ namespace PeakSort.DataAccess.Migrations
                             ID = 1,
                             CategoryID = 1,
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 9, 21, 11, 24, 23, 712, DateTimeKind.Local).AddTicks(9238),
+                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 279, DateTimeKind.Local).AddTicks(560),
                             Description = "Deneme1",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 9, 21, 11, 24, 23, 712, DateTimeKind.Local).AddTicks(9251),
+                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 279, DateTimeKind.Local).AddTicks(585),
                             Note = "Note deneme",
                             SeoDescription = "Deneme1",
                             SeoTags = "Deneme1",
                             Thumbnail = "Deneme1",
                             Title = "Deneme1",
-                            date = new DateTime(2023, 9, 21, 11, 24, 23, 712, DateTimeKind.Local).AddTicks(7612)
+                            date = new DateTime(2023, 10, 19, 14, 21, 34, 278, DateTimeKind.Local).AddTicks(7727)
                         });
                 });
 
@@ -397,13 +401,13 @@ namespace PeakSort.DataAccess.Migrations
                         {
                             ID = 1,
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 9, 21, 11, 24, 23, 715, DateTimeKind.Local).AddTicks(5605),
+                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 285, DateTimeKind.Local).AddTicks(6218),
                             Description = "Deneme1",
                             Image = "Deneme1",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 9, 21, 11, 24, 23, 715, DateTimeKind.Local).AddTicks(5621),
+                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 285, DateTimeKind.Local).AddTicks(6252),
                             Note = "Note deneme",
                             Title = "Deneme1"
                         });
@@ -468,13 +472,13 @@ namespace PeakSort.DataAccess.Migrations
                         {
                             ID = 1,
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 9, 21, 11, 24, 23, 717, DateTimeKind.Local).AddTicks(6125),
+                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 289, DateTimeKind.Local).AddTicks(7819),
                             Description = "Deneme1",
                             Image = "Deneme1",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 9, 21, 11, 24, 23, 717, DateTimeKind.Local).AddTicks(6140),
+                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 289, DateTimeKind.Local).AddTicks(7847),
                             Note = "Note deneme",
                             Title = "Deneme1"
                         });
@@ -482,162 +486,208 @@ namespace PeakSort.DataAccess.Migrations
 
             modelBuilder.Entity("PeakSort.Entities.Concrete.Role", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("CreatedByName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR(MAX)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedByName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Note")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 9, 21, 11, 24, 23, 719, DateTimeKind.Local).AddTicks(4480),
-                            Description = "Deneme1",
-                            IsActive = true,
-                            IsDeleted = false,
-                            ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 9, 21, 11, 24, 23, 719, DateTimeKind.Local).AddTicks(4495),
-                            Name = "Deneme1",
-                            Note = "Note deneme"
-                        });
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("PeakSort.Entities.Concrete.RoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("PeakSort.Entities.Concrete.User", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("CreatedByName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("ModifiedByName")
-                        .IsRequired()
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NormalizedUserName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Note")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("VARBINARY(500)");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Picture")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int>("RoleID")
-                        .HasColumnType("int");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
 
-                    b.HasIndex("RoleID");
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("UserName")
-                        .IsUnique();
+                    b.ToTable("AspNetUsers");
+                });
 
-                    b.ToTable("Users");
+            modelBuilder.Entity("PeakSort.Entities.Concrete.UserClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 9, 21, 11, 24, 23, 730, DateTimeKind.Local).AddTicks(5791),
-                            Email = "Deneme1",
-                            FirstName = "Deneme1",
-                            IsActive = true,
-                            IsDeleted = false,
-                            LastName = "Deneme1",
-                            ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 9, 21, 11, 24, 23, 730, DateTimeKind.Local).AddTicks(5820),
-                            Note = "Note deneme",
-                            PasswordHash = new byte[] { 68, 101, 110, 101, 109, 101, 49 },
-                            Picture = "Deneme1",
-                            RoleID = 1,
-                            UserName = "Deneme1"
-                        });
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("PeakSort.Entities.Concrete.UserLogin", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("PeakSort.Entities.Concrete.UserRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("PeakSort.Entities.Concrete.UserToken", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("PeakSort.Entities.Concrete.Product", b =>
@@ -651,20 +701,55 @@ namespace PeakSort.DataAccess.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("PeakSort.Entities.Concrete.User", b =>
+            modelBuilder.Entity("PeakSort.Entities.Concrete.RoleClaim", b =>
                 {
-                    b.HasOne("PeakSort.Entities.Concrete.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleID")
+                    b.HasOne("PeakSort.Entities.Concrete.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PeakSort.Entities.Concrete.UserClaim", b =>
+                {
+                    b.HasOne("PeakSort.Entities.Concrete.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PeakSort.Entities.Concrete.UserLogin", b =>
+                {
+                    b.HasOne("PeakSort.Entities.Concrete.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PeakSort.Entities.Concrete.UserRole", b =>
+                {
+                    b.HasOne("PeakSort.Entities.Concrete.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Role");
+                    b.HasOne("PeakSort.Entities.Concrete.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("PeakSort.Entities.Concrete.Role", b =>
+            modelBuilder.Entity("PeakSort.Entities.Concrete.UserToken", b =>
                 {
-                    b.Navigation("Users");
+                    b.HasOne("PeakSort.Entities.Concrete.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

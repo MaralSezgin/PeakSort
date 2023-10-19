@@ -105,8 +105,10 @@ namespace PeakSort.Business.Concrete
 
         public async Task<DataResult<CategoryDto>> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName)
         {
-            var category = await _unitOfWork.Categorys.GetAsync(x => x.CategoryID == categoryUpdateDto.ID);
+            var category = await _unitOfWork.Categorys.GetAsync(x => x.CategoryID == categoryUpdateDto.CategoryID);
           
+            if(category!=null)
+            {
                 category.CategoryName = categoryUpdateDto.CategoryName;
                 category.Description = categoryUpdateDto.Description;
                 category.Note = categoryUpdateDto.Note;
@@ -120,12 +122,33 @@ namespace PeakSort.Business.Concrete
                 {
                     Category = updateCategory,
                     ResultStatus = ResultStatus.Success,
-                    Message=$"{updateCategory.CategoryName} adlı kategori başarıyla güncellenmiştir",
+                    Message = $"{updateCategory.CategoryName} adlı kategori başarıyla güncellenmiştir",
 
                 });
-                
+            }
+            return new DataResult<CategoryDto>(ResultStatus.Error,"Kategori bulunamadı", new CategoryDto
+            {
 
-            
+                ResultStatus = ResultStatus.Success,
+                Message ="Kategori bulunamdı",
+                    
+            });
+
+
+
+
+        }
+
+        public async Task<DataResult<CategoryUpdateDto>> GetCategoryUpdateDto(int categoryId)
+        {
+            var result = await _unitOfWork.Categorys.AnyAsync(x=>x.CategoryID==categoryId);
+            if(result)
+            {
+                var category = await _unitOfWork.Categorys.GetAsync(x => x.CategoryID == categoryId);
+                var categoryUpdateDto = _mapper.Map<CategoryUpdateDto>(category);
+                return new DataResult<CategoryUpdateDto>(ResultStatus.Success, categoryUpdateDto);
+            }
+            return new DataResult<CategoryUpdateDto>(ResultStatus.Error, "Böyle bir kategori bulunamadı", null);
 
         }
     }

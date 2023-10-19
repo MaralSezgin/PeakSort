@@ -12,7 +12,7 @@ namespace PeakSort.Entities.Dtos
     public class CategoryUpdateDto
     {
         [Required]
-        public int  ID { get; set; }
+        public int CategoryID { get; set; }
 
         [DisplayName("Kategori Adı")]
         [Required(ErrorMessage = "{0} boş geçilmemelidir")]

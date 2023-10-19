@@ -1,4 +1,4 @@
-﻿using PeakSort.Core.DataAccess.Abstract;
+﻿using PeakSort.Core.Entities.Abstract;
 using PeakSort.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeakSort.DataAccess.Abstract
+namespace PeakSort.Entities.Dtos
 {
-   public interface IUserRepository:IEntityRepository<User>
+    public class UserListDto:DtoGetBase
     {
+        public IList<User> Users { get; set; }
     }
 }

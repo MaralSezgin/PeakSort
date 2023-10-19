@@ -13,54 +13,44 @@ namespace PeakSort.DataAccess.Concrete.EntityFramework.Mappings
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(r => r.ID);
-            builder.Property(u => u.ID).ValueGeneratedOnAdd();
-            builder.Property(u => u.Email).HasMaxLength(50).IsRequired();
-            builder.HasIndex(u => u.Email).IsUnique();//bu emailden bir tane daha oluşturulamaz
-            builder.Property(u => u.UserName).HasMaxLength(20).IsRequired();
-            builder.HasIndex(u => u.UserName).IsUnique();
-            builder.Property(u => u.PasswordHash).IsRequired();
-            builder.Property(u => u.PasswordHash).HasColumnType("VARBINARY(500)");
-            builder.Property(u => u.FirstName).HasMaxLength(30).IsRequired();
-            builder.Property(u => u.LastName).HasMaxLength(30).IsRequired();
+            var b = builder;
+
             builder.Property(u => u.Picture).HasMaxLength(250).IsRequired();
+            // Primary key
+            b.HasKey(u => u.Id);
 
-            builder.HasOne<Role>(u => u.Role).WithMany(r => r.Users).HasForeignKey(u => u.RoleID);
+            // Indexes for "normalized" username and email, to allow efficient lookups
+            b.HasIndex(u => u.NormalizedUserName).HasDatabaseName("UserNameIndex").IsUnique();
+            b.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
 
-            //builder.Property(u=>u.CreatedByName).HasColumnName("CREATED_NAME")//eger veri tabanında "CREATED_NAME" adında bir sutun varsa onunla bunu map ediyor
+            // Maps to the AspNetUsers table
+            b.ToTable("AspNetUsers");
 
-            builder.Property(u => u.CreatedByName).HasMaxLength(50).IsRequired();
-            builder.Property(u => u.ModifiedByName).HasMaxLength(50).IsRequired();
-            builder.Property(u => u.CreatedDate).IsRequired();
-            builder.Property(u => u.ModifiedDate).IsRequired();
-            builder.Property(u => u.IsActive).IsRequired();
-            builder.Property(u => u.IsDeleted).IsRequired();
-            builder.Property(u => u.Note).HasMaxLength(50);
+            // A concurrency token for use with the optimistic concurrency checking
+            b.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
 
-            builder.ToTable("Users");
+            // Limit the size of columns to use efficient database types
+            b.Property(u => u.UserName).HasMaxLength(50);
+            b.Property(u => u.NormalizedUserName).HasMaxLength(50);
+            b.Property(u => u.Email).HasMaxLength(100);
+            b.Property(u => u.NormalizedEmail).HasMaxLength(100);
 
-            builder.HasData(new User
-            {
-                ID = 1,
-                Email = "Deneme1",
-                UserName = "Deneme1",
-                PasswordHash = Encoding.ASCII.GetBytes( "Deneme1"),
-                FirstName = "Deneme1",
-                LastName = "Deneme1",
-                Picture = "Deneme1",
-                RoleID=1,
-          
+            // The relationships between User and other entity types
+            // Note that these relationships are configured with no navigation properties
+
+            // Each User can have many UserClaims
+            b.HasMany<UserClaim>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
+
+            // Each User can have many UserLogins
+            b.HasMany<UserLogin>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
+
+            // Each User can have many UserTokens
+            b.HasMany<UserToken>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
+
+            // Each User can have many entries in the UserRole join table
+            b.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
 
 
-                CreatedByName = "Berivan",
-                ModifiedByName = "sezgin",
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now,
-                IsActive = true,
-                IsDeleted = false,
-                Note = "Note deneme",
-
-            });
         }
     }
 }

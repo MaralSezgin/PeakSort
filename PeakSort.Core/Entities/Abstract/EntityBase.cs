@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace PeakSort.Core.Entities.Abstract
 {
-    public class EntityBase
-    {
+    public abstract class EntityBase
+    { 
    
         public virtual DateTime CreatedDate { get; set; } = DateTime.Now;
-        public virtual DateTime ModifiedDate { get; set; }
+        public virtual DateTime ModifiedDate { get; set; } = DateTime.Now;
 
         public virtual bool IsDeleted { get; set; }
         public virtual bool  IsActive { get; set; }
