@@ -10,7 +10,7 @@
 <div class="card mb-4 mt-4">
     <div class="card-header">
         <i class="fas fa-table mr-1"></i>
-        Kategoriler
+        Kullanıcılar
     </div>
     <div class="card-body">
         <div class="spinner-border" role="status" style="display:none">
@@ -50,8 +50,8 @@
                         <td>@user.UserName</td>
                         <td>@user.Email</td>
                         <td>@user.PhoneNumber</td>
-                        <td>@user.Picture</td>
-               
+                        <td><img src="~/img/@user.Picture" class="my-image-table" alt="@user.UserName"/></td>
+                       
                         <td>
                             <button class="btn btn-danger btn-sm btn-delete" data-id="@user.Id"><span class="fas fa-minus-circle"></span></button>
                             <button class="btn btn-primary btn-sm btn-update" data-id="@user.Id"><span class="fas fa-edit "></span></button>

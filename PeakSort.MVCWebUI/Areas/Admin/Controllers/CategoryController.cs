@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PeakSort.Business.Abstract;
 using PeakSort.Core.Utilities.ComplexType;
 using PeakSort.Core.Utilities.Extensions;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 namespace PeakSort.MVCWebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -117,5 +119,6 @@ namespace PeakSort.MVCWebUI.Areas.Admin.Controllers
             else
                 return NotFound();
         }
+    
     }
 }

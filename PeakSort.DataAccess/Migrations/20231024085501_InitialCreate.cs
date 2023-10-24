@@ -308,32 +308,60 @@ namespace PeakSort.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Abouts",
                 columns: new[] { "ID", "CreatedByName", "CreatedDate", "Description", "GITDENEME", "Image", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Note", "Title", "VideoLink" },
-                values: new object[] { 1, "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 237, DateTimeKind.Local).AddTicks(279), "About Description", 0, "Default.jpg", true, false, "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 237, DateTimeKind.Local).AddTicks(1014), "Note deneme", "About Title", "deneme" });
+                values: new object[] { 1, "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 430, DateTimeKind.Local).AddTicks(1298), "About Description", 0, "Default.jpg", true, false, "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 430, DateTimeKind.Local).AddTicks(1734), "Note deneme", "About Title", "deneme" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" },
+                    { 2, "00000000-0000-0000-0000-000000000000", "Editor", "EDITOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { 1, 0, "c48986da-e4d2-436a-a93a-2d62009bb1f3", "adminuser@gmail.com", true, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAEAACcQAAAAEH4zRbQIKyTMh7o1J0dq5rFLPnmY1MzDC5Uk9I1HClx7ZtCxqQ8UAw+q/RfnJjauVQ==", "+905555555555", true, "defaultUser.png", "00000000-0000-0000-0000-000000000000", false, "adminuser" },
+                    { 2, 0, "a74568b6-5898-4519-8a82-3218f37555f3", "editoruser@gmail.com", true, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAEAACcQAAAAEGY4oTSepphgXa4USkf1MXp+Kv/RYxYKxtYqj2mKjizpWg1uTOuO5AfcYsMbpZkxQg==", "+905555555555", true, "defaultUser.png", "00000000-0000-0000-0000-000000000000", false, "editoruser" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "CategoryID", "CategoryName", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Note" },
-                values: new object[] { 1, "Deneme1", "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 243, DateTimeKind.Local).AddTicks(6071), "category Description", true, false, "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 243, DateTimeKind.Local).AddTicks(6105), "Note deneme" });
+                values: new object[] { 1, "Deneme1", "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 433, DateTimeKind.Local).AddTicks(7331), "category Description", true, false, "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 433, DateTimeKind.Local).AddTicks(7346), "Note deneme" });
 
             migrationBuilder.InsertData(
                 table: "Contacts",
                 columns: new[] { "ID", "Address", "Address1", "CreatedByName", "CreatedDate", "Email", "Fax", "Image", "IsActive", "IsDeleted", "MapLink", "MobilePhone", "MobilePhone1", "ModifiedByName", "ModifiedDate", "Note", "Phone" },
-                values: new object[] { 1, "Deneme1", "Deneme1", "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 252, DateTimeKind.Local).AddTicks(7275), "Deneme1", "Deneme1", "Deneme1", true, false, "Deneme1", "Deneme1", "Deneme1", "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 252, DateTimeKind.Local).AddTicks(7329), "Note deneme", "Deneme1" });
+                values: new object[] { 1, "Deneme1", "Deneme1", "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 436, DateTimeKind.Local).AddTicks(9113), "Deneme1", "Deneme1", "Deneme1", true, false, "Deneme1", "Deneme1", "Deneme1", "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 436, DateTimeKind.Local).AddTicks(9134), "Note deneme", "Deneme1" });
 
             migrationBuilder.InsertData(
                 table: "Projects",
                 columns: new[] { "ID", "CreatedByName", "CreatedDate", "Description", "Image", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Note", "Title" },
-                values: new object[] { 1, "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 285, DateTimeKind.Local).AddTicks(6218), "Deneme1", "Deneme1", true, false, "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 285, DateTimeKind.Local).AddTicks(6252), "Note deneme", "Deneme1" });
+                values: new object[] { 1, "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 442, DateTimeKind.Local).AddTicks(410), "Deneme1", "Deneme1", true, false, "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 442, DateTimeKind.Local).AddTicks(430), "Note deneme", "Deneme1" });
 
             migrationBuilder.InsertData(
                 table: "References",
                 columns: new[] { "ID", "CreatedByName", "CreatedDate", "Description", "Image", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Note", "Title", "VideoLink" },
-                values: new object[] { 1, "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 289, DateTimeKind.Local).AddTicks(7819), "Deneme1", "Deneme1", true, false, "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 289, DateTimeKind.Local).AddTicks(7847), "Note deneme", "Deneme1", null });
+                values: new object[] { 1, "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 444, DateTimeKind.Local).AddTicks(1335), "Deneme1", "Deneme1", true, false, "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 444, DateTimeKind.Local).AddTicks(1348), "Note deneme", "Deneme1", null });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { 2, 2 });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "CategoryID", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Note", "SeoDescription", "SeoTags", "Thumbnail", "Title", "date" },
-                values: new object[] { 1, 1, "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 279, DateTimeKind.Local).AddTicks(560), "Deneme1", true, false, "sezgin", new DateTime(2023, 10, 19, 14, 21, 34, 279, DateTimeKind.Local).AddTicks(585), "Note deneme", "Deneme1", "Deneme1", "Deneme1", "Deneme1", new DateTime(2023, 10, 19, 14, 21, 34, 278, DateTimeKind.Local).AddTicks(7727) });
+                values: new object[] { 1, 1, "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 439, DateTimeKind.Local).AddTicks(7622), "Deneme1", true, false, "sezgin", new DateTime(2023, 10, 24, 11, 55, 0, 439, DateTimeKind.Local).AddTicks(7635), "Note deneme", "Deneme1", "Deneme1", "Deneme1", "Deneme1", new DateTime(2023, 10, 24, 11, 55, 0, 439, DateTimeKind.Local).AddTicks(5891) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

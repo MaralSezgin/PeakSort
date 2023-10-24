@@ -22,7 +22,7 @@ namespace PeakSort.Business.Extensions
             {
                 //user password setting
                 x.Password.RequireDigit = false;//şifre rakamlı olsun mu(rakam zrounlu degil)
-                x.Password.RequiredLength = 10;//şifre 10karakter
+                x.Password.RequiredLength = 6;//şifre 10karakter
                 x.Password.RequiredUniqueChars = 2;// 2 özel karakter istiyoruz *_- .. gibi
                 x.Password.RequireNonAlphanumeric = false;// @ gibi rakterere gerek yok bak
                 x.Password.RequireLowercase = false;//büyük küçük takılmıyor

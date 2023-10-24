@@ -21,10 +21,25 @@ namespace PeakSort.MVCWebUI
         {
            
             services.AddControllersWithViews().AddRazorRuntimeCompilation();//sen bir mvc uygulamasý olarak çalýþmalaýsýn
-            services.AddAutoMapper(typeof(CategoryProfile),typeof(ProductProfile));//Automapper kullanmalarýzý düzenler derlenme sýrasýnda
+            services.AddAutoMapper(typeof(CategoryProfile),typeof(ProductProfile),typeof(UserProfile));//Automapper kullanmalarýzý düzenler derlenme sýrasýnda
 
             services.AddSession();
             services.LoadServices();//bu servisleri biz yazdýk
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Admin/User/Login");
+                options.LogoutPath = new PathString("/Admin/User/Logout");
+                options.Cookie = new CookieBuilder
+                {
+                    Name = "Peaksort",
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.Strict,
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest // Always
+                };
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = System.TimeSpan.FromDays(7);
+                options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

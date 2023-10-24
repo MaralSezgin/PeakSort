@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('#usersTable').DataTable({
+   const dataTable= $('#usersTable').DataTable({
         dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-5'i><'col-sm-7'p>>",
@@ -59,63 +59,71 @@
             function (event) {
                 event.preventDefault();
 
-                const form = $('#form-category-add');
+                const form = $('#form-user-add');
 
                 const urlAction = form.attr('action');
-                const dataSend = form.serialize();
+                const dataSend = new FormData(form.get(0));
+
+                $.ajax({
+
+                    url: urlAction,
+                    type: 'POST',
+                    data: dataSend,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+
+                        const userAddAjaxModel = jQuery.parseJSON(data);
+                        const newFormBody = $('.modal-body', userAddAjaxModel.UserAddPartial);
+                        placeHolder.find('.modal-body').replaceWith(newFormBody);
+                       
+                        const isValid = newFormBody.find('[name="IsValid"]').val() === 'True';
+                        if (isValid) {
+                            placeHolder.find('.modal').modal('hide');
+                           
+                            dataTable.row.add([
+
+                                userAddAjaxModel.UserDto.User.Id,
+                                userAddAjaxModel.UserDto.User.UserName,
+                                userAddAjaxModel.UserDto.User.Email,
+                                userAddAjaxModel.UserDto.User.PhoneNumber,
+                               
+                                `<img src="/img/${userAddAjaxModel.UserDto.User.Picture}" style="max-height:50px; max-width:50px" alt="${userAddAjaxModel.UserDto.User.Picture}" />`,
+                                `<td>
+                                    <button class="btn btn-danger btn-sm btn-delete" data-id="userAddAjaxModel.UserDto.User.id"><span class="fas fa-minus-circle"></span></button>
+                                    <button class="btn btn-primary btn-sm btn-update" data-id="userAddAjaxModel.UserDto.User.id"><span class="fas fa-edit "></span></button>
+                                </td>`
 
 
-                $.post(urlAction, dataSend).done(function (data) {
+                            ]).draw();
+                            toastr.success(`${userAddAjaxModel.UserDto.User.UserName}`, 'Başarıyla eklendi');
 
-                    const categoryAddAjaxModel = jQuery.parseJSON(data);
+                        }
+                        else {
 
+                            let warningText = "";
+                            $('#validation-summary>ul>li').each(function () {
 
+                                let text = $(this).text();
+                                warningText = `*${text}\n`;
+                            });
+                            toastr.warning(warningText);
 
-
-                    const newFormBody = $('.modal-body', categoryAddAjaxModel.CategoryAddPartial);
-                    placeHolder.find('.modal-body').replaceWith(newFormBody);
-
-                    const isValid = newFormBody.find('[name="IsValid"]').val() === 'True';
-
-                    if (isValid) {
-                        placeHolder.find('.modal').modal('hide');
-                        const newTableRow = `
-                          <tr name=${categoryAddAjaxModel.CategoryDto.Category.CategoryID}>
-                            <td>${categoryAddAjaxModel.CategoryDto.Category.CategoryID}</td>
-                            <td>${categoryAddAjaxModel.CategoryDto.Category.CategoryName}</td>
-                            <td>${categoryAddAjaxModel.CategoryDto.Category.Description}</td>
-                            <td>${categoryAddAjaxModel.CategoryDto.Category.Note}</td>
-                            <td>${categoryAddAjaxModel.CategoryDto.Category.IsActive}</td>
-                            <td>${categoryAddAjaxModel.CategoryDto.Category.CreatedByName}</td>
-                            <td>${categoryAddAjaxModel.CategoryDto.Category.ModifiedByName}</td>
-                            <td>${converToShortDate(categoryAddAjaxModel.CategoryDto.Category.CreatedDate)}</td>
-                            <td>${converToShortDate(categoryAddAjaxModel.CategoryDto.Category.ModifiedDate)}</td>
-                            <td>
-                            <button class="btn btn-danger btn-sm btn-delete" data-id="${categoryAddAjaxModel.CategoryDto.Category.CategoryID}"><span class="fas fa-minus-circle"></span></button>
-                            <button class="btn btn-primary btn-sm btn-update" data-id="${categoryAddAjaxModel.CategoryDto.Category.CategoryID}"><span class="fas fa-edit "></span></button>
-                           </td>
-                         <tr>`
-                        const newTableObject = $(newTableRow);
-                        newTableObject.hide();
-                        $('#categoriesTable').append(newTableObject);
-                        newTableObject.fadeIn(3000);
-                        toastr.success(`${categoryAddAjaxModel.CategoryDto.Category.CategoryName}`, 'Başarıyla eklendi');
-
-                    }
-                    else {
-
-                        let warningText = "";
-                        $('#validation-summary>ul>li').each(function () {
-
-                            let text = $(this).text();
-                            warningText = `*${text}\n`;
-                        });
-                        toastr.warning(warningText);
-
-                    }
+                        }
 
 
-                });
+
+                    },/*success end*/
+                    error: function (err) {
+                        console.log(err);
+                    },
+
+
+
+
+                });/*ajax end*/
+
+          
 
             });
 
@@ -125,7 +133,7 @@
             const id = $(this).attr('data-id');
             Swal.fire({
                 title: 'Silmek istediğinize emin misiniz?',
-                text: "Seçili kategori silinecektir!",
+                text: "Seçili kullanıcı silinecektir!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -137,19 +145,19 @@
                     $.ajax({
                         type: 'POST',
                         dataType: 'json',
-                        data: { categoryId: id },
-                        url: '/Admin/Category/Delete/',
+                        data: { userId: id },
+                        url: '/Admin/User/Delete/',
 
                         success: function (data) {
                             const result = jQuery.parseJSON(data);
                             if (result.ResultStatus === 0) {
                                 Swal.fire(
                                     'Silindi!',
-                                    'Seçili kategori başarıyla silindi.',
+                                    'Seçili kullanıcı başarıyla silindi.',
                                     'success'
                                 )
                                 const tableRow = $(`[name="${id}"]`);
-                                tableRow.fadeOut(2500);
+                                dataTable.row(tableRow).remove().draw();
                             }
                             else {
                                 Swal.fire({
@@ -171,14 +179,15 @@
     });
 
     $(function () {
-        const url = '/Admin/Category/Update/';
+        const url = '/Admin/User/Update/';
         const placeHolderDiv = $('#modelPlaceHolder');
 
         $(document).on('click', '.btn-update', function (event) {
             event.preventDefault();
             const id = $(this).attr('data-id');
-           
-            $.get(url, { categoryId: id }).done(function (data) {
+            
+            
+            $.get(url, { userId: id }).done(function (data) {
              
                 placeHolderDiv.html(data);
                 placeHolderDiv.find('.modal').modal('show');
@@ -190,65 +199,75 @@
         });
 
         /* Ajax POST / Updating a Category start from here*/
-
+     
         $(document).on('click', '#btnUpdate', function (event) {
             event.preventDefault();
-            const form = $('#form-category-update');
+            const form = $('#form-user-update');
             const urlAction = form.attr('action');
 
-            const sendToData = form.serialize();
-        
+            const dataSend = new FormData(form.get(0));
 
-            $.post(urlAction, sendToData).done(function (data) {
+            $.ajax({
 
-                const categoryAjaxUpdateModel = jQuery.parseJSON(data);
-                console.log(categoryAjaxUpdateModel);
-                const newFormBody = $('.modal-body', categoryAjaxUpdateModel.CategoryUpdatePartial);
-                placeHolderDiv.find('.modal-body').replaceWith(newFormBody);
+                url: urlAction,
+                type: 'POST',
+                data: dataSend,
+                processData: false,
+                contentType: false,
+                success: function (data) {
 
-                const isValid = newFormBody.find('[name="IsValid"]').val() === 'True';
+                    const userAjaxUpdateModel = jQuery.parseJSON(data);
+                    const newFormBody = $('.modal-body', userAjaxUpdateModel.UserUpdatePartial);
+                    placeHolderDiv.find('.modal-body').replaceWith(newFormBody);
 
-            
-                if (isValid)
-                {
+                    const isValid = newFormBody.find('[name="IsValid"]').val() === 'True';
+
+                    const id = userAjaxUpdateModel.UserDto.User.Id;
+                    const tableRow = $(`[name="${id}"]`);
+                    
+                    if (isValid) {
+                    
+                        placeHolderDiv.find('.modal').modal('hide');
+                       
+                        dataTable.row(tableRow).data([
+
+                            userAjaxUpdateModel.UserDto.User.Id,
+                            userAjaxUpdateModel.UserDto.User.UserName,
+                            userAjaxUpdateModel.UserDto.User.Email,
+                            userAjaxUpdateModel.UserDto.User.PhoneNumber,
+
+                            `<img class="my-image-table"  src="/img/${userAjaxUpdateModel.UserDto.User.Picture}" alt="${userAjaxUpdateModel.UserDto.User.Picture}" />`,
+                            `
+                                    <button class="btn btn-danger btn-sm btn-delete" data-id="${userAjaxUpdateModel.UserDto.User.id}"><span class="fas fa-minus-circle"></span></button>
+                                    <button class="btn btn-primary btn-sm btn-update" data-id="${userAjaxUpdateModel.UserDto.User.id}"><span class="fas fa-edit "></span></button>
+                              `
+
+
+                        ]);
+                        tableRow.attr("name", `${id}`);
+                        dataTable.row(tableRow).invalidate();
+                        toastr.success(`${userAjaxUpdateModel.UserDto.Message}`, 'Başarıyla eklendi');
+
                   
-                    placeHolderDiv.find('.modal').modal('hide');
+                    }
+                    else {
+                        toastr.error("Başarısız");
+                    }
 
-                    const newTableRow = `
-                     <tr name="${categoryAjaxUpdateModel.CategoryDto.Category.CategoryID}">
-                            <td>${categoryAjaxUpdateModel.CategoryDto.Category.CategoryID}</td>
-                            <td>${categoryAjaxUpdateModel.CategoryDto.Category.CategoryName}</td>
-                            <td>${categoryAjaxUpdateModel.CategoryDto.Category.Description}</td>
-                            <td>${categoryAjaxUpdateModel.CategoryDto.Category.Note}</td>
-                            <td>${categoryAjaxUpdateModel.CategoryDto.Category.IsActive}</td>
-                            <td>${categoryAjaxUpdateModel.CategoryDto.Category.CreatedByName}</td>
-                            <td>${categoryAjaxUpdateModel.CategoryDto.Category.ModifiedByName}</td>
-                            <td>${converToShortDate(categoryAjaxUpdateModel.CategoryDto.Category.CreatedDate)}</td>
-                            <td>${converToShortDate(categoryAjaxUpdateModel.CategoryDto.Category.ModifiedDate)}</td>
-                            <td>
-                            <button class="btn btn-danger btn-sm btn-delete" data-id="${categoryAjaxUpdateModel.CategoryDto.Category.CategoryID}"><span class="fas fa-minus-circle"></span></button>
-                            <button class="btn btn-primary btn-sm btn-update" data-id="${categoryAjaxUpdateModel.CategoryDto.Category.CategoryID}"><span class="fas fa-edit "></span></button>
-                           </td>
-                     <tr>`
 
-                    const newTableRowObject = $(newTableRow);
-                    const categoryTableRow = $(`[name="${categoryAjaxUpdateModel.CategoryDto.Category.CategoryID}"]`);
-                    categoryTableRow.replaceWith(newTableRowObject);
-                    categoryTableRow.hide();
-                    newTableRowObject.hide();
-                    categoryTableRow.fadeIn(3500);
-                    newTableRowObject.fadeIn(3500);
-                    newTableRowObject.css('background-color', '#acd3ff');
-                    toastr.success(`${categoryAjaxUpdateModel.CategoryDto.Category.CategoryName }`,"İşlem Başarılı")
+                },
+                error: function (error) {
+                    console.log(error);
                 }
-                else {
-                    toastr.error("Başarısız");
-                }
-               
-            }).fail(function (response) {
-             
+
+
 
             });
+             
+        
+             
+
+      
 
 
 
@@ -261,3 +280,19 @@
 
 });
 
+//const newTableRow = `
+//                          <tr name=${categoryAddAjaxModel.CategoryDto.Category.CategoryID}>
+//                            <td>${categoryAddAjaxModel.CategoryDto.Category.CategoryID}</td>
+//                            <td>${categoryAddAjaxModel.CategoryDto.Category.CategoryName}</td>
+//                            <td>${categoryAddAjaxModel.CategoryDto.Category.Description}</td>
+//                            <td>${categoryAddAjaxModel.CategoryDto.Category.Note}</td>
+//                            <td>${categoryAddAjaxModel.CategoryDto.Category.IsActive}</td>
+//                            <td>${categoryAddAjaxModel.CategoryDto.Category.CreatedByName}</td>
+//                            <td>${categoryAddAjaxModel.CategoryDto.Category.ModifiedByName}</td>
+//                            <td>${converToShortDate(categoryAddAjaxModel.CategoryDto.Category.CreatedDate)}</td>
+//                            <td>${converToShortDate(categoryAddAjaxModel.CategoryDto.Category.ModifiedDate)}</td>
+//                            <td>
+//                            <button class="btn btn-danger btn-sm btn-delete" data-id="${categoryAddAjaxModel.CategoryDto.Category.CategoryID}"><span class="fas fa-minus-circle"></span></button>
+//                            <button class="btn btn-primary btn-sm btn-update" data-id="${categoryAddAjaxModel.CategoryDto.Category.CategoryID}"><span class="fas fa-edit "></span></button>
+//                           </td>
+//                         <tr>`

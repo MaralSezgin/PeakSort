@@ -1,18 +1,23 @@
-﻿@model PeakSort.Entities.Dtos.UserAddDto
+﻿@model PeakSort.Entities.Dtos.UserUpdateDto
 
 <div class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><span class="fas fa-plus"></span>Kullanıcı Ekle</h5>
+                <h5 class="modal-title"><span class="fas fa-edit"></span> Kullanıcı Düzenle</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="İptal">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form asp-action="Add" id="form-user-add">
+                <form asp-action="Update" id="form-user-update">
                     <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
                     <div asp-validation-summary="All" id="validation-summary" aria-hidden="true" style="display:none"> </div>
+                    <div class="form-group">
+                        <label asp-for="Id "></label>
+                        <input class="form-control" asp-for="Id" placeholder="Kullanıcı adı" />
+                        <span class="text-danger" asp-validation-for="Id"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="UserName "></label>
                         <input class="form-control" asp-for="UserName" placeholder="Kullanıcı adı" />
@@ -23,19 +28,21 @@
                         <input class="form-control" asp-for="Email" placeholder="E-Posta" />
                         <span class="text-danger" asp-validation-for="Email"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Password"></label>
-                        <input type="password" class="form-control" asp-for="Password" placeholder="Şifre" />
-                        <span class="text-danger" asp-validation-for="Password"></span>
-                    </div>
+
                     <div class="form-group">
                         <label asp-for="PhoneNumber"></label>
                         <input type="text" class="form-control" asp-for="PhoneNumber" placeholder="Telefon Numarası" />
                         <span class="text-danger" asp-validation-for="PhoneNumber"></span>
                     </div>
                     <div class="form-group">
+                        <img src="~/img/@Model.Picture" alt="@Model.UserName" class="my-image" />
+                        <label asp-for="Picture">@Model.Picture</label>
+                        <input asp-for="Picture"  type="hidden"/>
+
+                    </div>
+                    <div class="form-group">
                         <label asp-for="PictureFile"></label>
-                        <input type="file" accept="image/*" class="form-control-file     " asp-for="PictureFile"  />
+                        <input type="file" accept="image/*" class="form-control-file     " asp-for="PictureFile" />
                         <span class="text-danger" asp-validation-for="PictureFile"></span>
                     </div>
 
@@ -46,7 +53,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-block" data-dismiss="modal"><span class="fas fa-times " ></span> İptal</button>
-                <button type="button" class="btn btn-primary btn-block" id="btnSave"><span class="fas fa-save"></span> Kaydet</button>
+                <button type="button" class="btn btn-primary btn-block" id="btnUpdate"><span class="fas fa-save"></span> Kaydet</button>
 
             </div>
         </div>

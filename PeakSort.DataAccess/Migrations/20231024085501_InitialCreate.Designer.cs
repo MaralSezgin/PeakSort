@@ -10,7 +10,7 @@ using PeakSort.DataAccess.Concrete.EntityFramework.Contexts;
 namespace PeakSort.DataAccess.Migrations
 {
     [DbContext(typeof(PeaksortContext))]
-    [Migration("20231019112136_InitialCreate")]
+    [Migration("20231024085501_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,14 +84,14 @@ namespace PeakSort.DataAccess.Migrations
                         {
                             ID = 1,
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 237, DateTimeKind.Local).AddTicks(279),
+                            CreatedDate = new DateTime(2023, 10, 24, 11, 55, 0, 430, DateTimeKind.Local).AddTicks(1298),
                             Description = "About Description",
                             GITDENEME = 0,
                             Image = "Default.jpg",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 237, DateTimeKind.Local).AddTicks(1014),
+                            ModifiedDate = new DateTime(2023, 10, 24, 11, 55, 0, 430, DateTimeKind.Local).AddTicks(1734),
                             Note = "Note deneme",
                             Title = "About Title",
                             VideoLink = "deneme"
@@ -150,12 +150,12 @@ namespace PeakSort.DataAccess.Migrations
                             CategoryID = 1,
                             CategoryName = "Deneme1",
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 243, DateTimeKind.Local).AddTicks(6071),
+                            CreatedDate = new DateTime(2023, 10, 24, 11, 55, 0, 433, DateTimeKind.Local).AddTicks(7331),
                             Description = "category Description",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 243, DateTimeKind.Local).AddTicks(6105),
+                            ModifiedDate = new DateTime(2023, 10, 24, 11, 55, 0, 433, DateTimeKind.Local).AddTicks(7346),
                             Note = "Note deneme"
                         });
                 });
@@ -240,7 +240,7 @@ namespace PeakSort.DataAccess.Migrations
                             Address = "Deneme1",
                             Address1 = "Deneme1",
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 252, DateTimeKind.Local).AddTicks(7275),
+                            CreatedDate = new DateTime(2023, 10, 24, 11, 55, 0, 436, DateTimeKind.Local).AddTicks(9113),
                             Email = "Deneme1",
                             Fax = "Deneme1",
                             Image = "Deneme1",
@@ -250,7 +250,7 @@ namespace PeakSort.DataAccess.Migrations
                             MobilePhone = "Deneme1",
                             MobilePhone1 = "Deneme1",
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 252, DateTimeKind.Local).AddTicks(7329),
+                            ModifiedDate = new DateTime(2023, 10, 24, 11, 55, 0, 436, DateTimeKind.Local).AddTicks(9134),
                             Note = "Note deneme",
                             Phone = "Deneme1"
                         });
@@ -332,18 +332,18 @@ namespace PeakSort.DataAccess.Migrations
                             ID = 1,
                             CategoryID = 1,
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 279, DateTimeKind.Local).AddTicks(560),
+                            CreatedDate = new DateTime(2023, 10, 24, 11, 55, 0, 439, DateTimeKind.Local).AddTicks(7622),
                             Description = "Deneme1",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 279, DateTimeKind.Local).AddTicks(585),
+                            ModifiedDate = new DateTime(2023, 10, 24, 11, 55, 0, 439, DateTimeKind.Local).AddTicks(7635),
                             Note = "Note deneme",
                             SeoDescription = "Deneme1",
                             SeoTags = "Deneme1",
                             Thumbnail = "Deneme1",
                             Title = "Deneme1",
-                            date = new DateTime(2023, 10, 19, 14, 21, 34, 278, DateTimeKind.Local).AddTicks(7727)
+                            date = new DateTime(2023, 10, 24, 11, 55, 0, 439, DateTimeKind.Local).AddTicks(5891)
                         });
                 });
 
@@ -403,13 +403,13 @@ namespace PeakSort.DataAccess.Migrations
                         {
                             ID = 1,
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 285, DateTimeKind.Local).AddTicks(6218),
+                            CreatedDate = new DateTime(2023, 10, 24, 11, 55, 0, 442, DateTimeKind.Local).AddTicks(410),
                             Description = "Deneme1",
                             Image = "Deneme1",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 285, DateTimeKind.Local).AddTicks(6252),
+                            ModifiedDate = new DateTime(2023, 10, 24, 11, 55, 0, 442, DateTimeKind.Local).AddTicks(430),
                             Note = "Note deneme",
                             Title = "Deneme1"
                         });
@@ -474,13 +474,13 @@ namespace PeakSort.DataAccess.Migrations
                         {
                             ID = 1,
                             CreatedByName = "sezgin",
-                            CreatedDate = new DateTime(2023, 10, 19, 14, 21, 34, 289, DateTimeKind.Local).AddTicks(7819),
+                            CreatedDate = new DateTime(2023, 10, 24, 11, 55, 0, 444, DateTimeKind.Local).AddTicks(1335),
                             Description = "Deneme1",
                             Image = "Deneme1",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "sezgin",
-                            ModifiedDate = new DateTime(2023, 10, 19, 14, 21, 34, 289, DateTimeKind.Local).AddTicks(7847),
+                            ModifiedDate = new DateTime(2023, 10, 24, 11, 55, 0, 444, DateTimeKind.Local).AddTicks(1348),
                             Note = "Note deneme",
                             Title = "Deneme1"
                         });
@@ -513,6 +513,22 @@ namespace PeakSort.DataAccess.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
+                            Name = "Editor",
+                            NormalizedName = "EDITOR"
+                        });
                 });
 
             modelBuilder.Entity("PeakSort.Entities.Concrete.RoleClaim", b =>
@@ -608,6 +624,44 @@ namespace PeakSort.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c48986da-e4d2-436a-a93a-2d62009bb1f3",
+                            Email = "adminuser@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMINUSER@GMAIL.COM",
+                            NormalizedUserName = "ADMINUSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH4zRbQIKyTMh7o1J0dq5rFLPnmY1MzDC5Uk9I1HClx7ZtCxqQ8UAw+q/RfnJjauVQ==",
+                            PhoneNumber = "+905555555555",
+                            PhoneNumberConfirmed = true,
+                            Picture = "defaultUser.png",
+                            SecurityStamp = "00000000-0000-0000-0000-000000000000",
+                            TwoFactorEnabled = false,
+                            UserName = "adminuser"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a74568b6-5898-4519-8a82-3218f37555f3",
+                            Email = "editoruser@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "EDITORUSER@GMAIL.COM",
+                            NormalizedUserName = "EDITORUSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGY4oTSepphgXa4USkf1MXp+Kv/RYxYKxtYqj2mKjizpWg1uTOuO5AfcYsMbpZkxQg==",
+                            PhoneNumber = "+905555555555",
+                            PhoneNumberConfirmed = true,
+                            Picture = "defaultUser.png",
+                            SecurityStamp = "00000000-0000-0000-0000-000000000000",
+                            TwoFactorEnabled = false,
+                            UserName = "editoruser"
+                        });
                 });
 
             modelBuilder.Entity("PeakSort.Entities.Concrete.UserClaim", b =>
@@ -669,6 +723,18 @@ namespace PeakSort.DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2
+                        });
                 });
 
             modelBuilder.Entity("PeakSort.Entities.Concrete.UserToken", b =>
