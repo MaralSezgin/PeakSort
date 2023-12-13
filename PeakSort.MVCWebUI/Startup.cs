@@ -1,37 +1,45 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PeakSort.Business.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using PeakSort.Business.AutoMapper.Profiles;
+using ProgrammersBlog.Services.AutoMapper.Profiles;
+using ProgrammersBlog.Services.Extensions;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using PeakSort.MVCWebUI.Helpers.Concrete;
+using PeakSort.MVCWebUI.Helpers.Abstract;
+using PeakSort.MVCWebUI.AutoMapper.Profiles;
 
-namespace PeakSort.MVCWebUI
+namespace ProgrammersBlog.Mvc
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-           
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();//sen bir mvc uygulamasý olarak çalýþmalaýsýn
-            services.AddAutoMapper(typeof(CategoryProfile),typeof(ProductProfile),typeof(UserProfile));//Automapper kullanmalarýzý düzenler derlenme sýrasýnda
-
+            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
             services.AddSession();
-            services.LoadServices();//bu servisleri biz yazdýk
+            services.AddAutoMapper(typeof(CategoryProfile),typeof(ArticleProfile),typeof(UserProfile));
+            services.LoadMyServices(connectionString:Configuration.GetConnectionString("LocalDB"));
+            services.AddScoped<IImageHelper, ImageHelper>();
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = new PathString("/Admin/User/Login");
                 options.LogoutPath = new PathString("/Admin/User/Logout");
                 options.Cookie = new CookieBuilder
                 {
-                    Name = "Peaksort",
+                    Name = "ProgrammersBlog",
                     HttpOnly = true,
                     SameSite = SameSiteMode.Strict,
                     SecurePolicy = CookieSecurePolicy.SameAsRequest // Always
@@ -48,29 +56,22 @@ namespace PeakSort.MVCWebUI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseStatusCodePages();//bulunmayan bir sayfaya gidince bize 404 döndür
-
+                app.UseStatusCodePages();
             }
 
-            app.UseSession();//UseAuthentication session kullanýyor o yüzden ilk ekledik
-
-            app.UseStaticFiles();//statik file kullanýmý söylüyoruzörnegin resim dosyasý
+            app.UseSession();
+            app.UseStaticFiles();
             app.UseRouting();
-
-
-            //UseRouting() den sonra yazmamýz kullanýcý gitmek istedigi yere yonlendiriliyor sonra UseAuthentication() giriyior
-            app.UseAuthentication();//kimlik konrolu
+            app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>//herhanbi bir istek gelince buraya girer
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapAreaControllerRoute(
-                     name: "Admin",
-                     areaName: "Admin",
-                     pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
-
-                    );
-                endpoints.MapDefaultControllerRoute();//default olarak home controler ve index e gidr
+                    name: "Admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+                );
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

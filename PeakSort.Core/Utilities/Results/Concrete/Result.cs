@@ -1,14 +1,15 @@
-﻿using PeakSort.Core.Utilities.ComplexType;
-using PeakSort.Core.Utilities.Results.Abstract;
+﻿using PeakSort.Core.Utilities.Results.Abstract;
+using PeakSort.Core.Utilities.Results.ComplexTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PeakSort.Core.Utilities.Results.Concrete
 {
-    public class Result : IResult
+   public class Result:IResult
     {
         public Result(ResultStatus resultStatus)
         {
@@ -26,9 +27,8 @@ namespace PeakSort.Core.Utilities.Results.Concrete
             Exception = exception;
         }
         public ResultStatus ResultStatus { get; }
-
         public string Message { get; }
-
         public Exception Exception { get; }
+        // new Result(ResultStatus.Error,exception.message,exception)
     }
 }

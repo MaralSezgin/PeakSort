@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PeakSort.DataAccess.Abstract
 {
-   public interface ICategoryRepository: IEntityRepository<Category>
+    public interface ICategoryRepository:IEntityRepository<Category>
     {
+        Task<Category> GetById(int categoryId);
     }
 }

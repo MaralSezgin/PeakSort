@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace PeakSort.DataAccess.Abstract
 {
-   public interface IUnitOfWork:IAsyncDisposable
+    public interface IUnitOfWork:IAsyncDisposable
     {
-        IAboutRepository Abouts { get; }
-        ICategoryRepository Categorys { get; }
-        IContactRepository Contacts { get; }
-        IProductRepository Products { get; }
-        IProjectRepository Projects { get; }
-        IReferenceRepository References { get; }
-
-
+        IArticleRepository Articles { get; } // unitofwork.Articles
+        ICategoryRepository Categories { get; }
+        ICommentRepository Comments { get; }
+        // _unitOfWork.Categories.AddAsync();
+        // _unitOfWork.Categories.AddAsync(category);
+        //_unitOfWork.Users.AddAsync(user);
+        //_unitOfWork.SaveAsync();
         Task<int> SaveAsync();
     }
 }

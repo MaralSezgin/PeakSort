@@ -1,40 +1,40 @@
-﻿using PeakSort.Core.Utilities.ComplexType;
+﻿
 using PeakSort.Core.Utilities.Results.Abstract;
+using PeakSort.Core.Utilities.Results.ComplexTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PeakSort.Core.Utilities.Results.Concrete
 {
-
-    public class DataResult<T> : IDataResult<T>
+    public class DataResult<T>:IDataResult<T>
     {
         public DataResult(ResultStatus resultStatus,T data)
         {
             ResultStatus = resultStatus;
             Data = data;
         }
-        public DataResult(ResultStatus resultStatus,string message, T data)
+        public DataResult(ResultStatus resultStatus, string message, T data)
         {
             ResultStatus = resultStatus;
-            Data = data;
             Message = message;
+            Data = data;
         }
         public DataResult(ResultStatus resultStatus, string message, T data,Exception exception)
         {
             ResultStatus = resultStatus;
-            Data = data;
             Message = message;
+            Data = data;
             Exception = exception;
         }
+        public ResultStatus ResultStatus { get; }
+        public string Message { get; }
+        public Exception Exception { get; }
         public T Data { get; }
 
-        public ResultStatus ResultStatus { get; }
-
-        public string Message { get; }
-
-        public Exception Exception { get; }
+    
     }
 }

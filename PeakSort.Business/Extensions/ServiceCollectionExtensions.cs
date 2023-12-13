@@ -1,51 +1,43 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using PeakSort.Business.Abstract;
-using PeakSort.Business.Concrete;
 using PeakSort.DataAccess.Abstract;
 using PeakSort.DataAccess.Concrete;
 using PeakSort.DataAccess.Concrete.EntityFramework.Contexts;
 using PeakSort.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+using ProgrammersBlog.Services.Abstract;
+using ProgrammersBlog.Services.Concrete;
 
-namespace PeakSort.Business.Extensions
+namespace ProgrammersBlog.Services.Extensions
 {
-   public static class ServiceCollectionExtensions
+    public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection  LoadServices(this IServiceCollection serviscollection)
+        public static IServiceCollection LoadMyServices(this IServiceCollection serviceCollection,string connectionString)
         {
-            serviscollection.AddIdentity<User, Role>(x =>
+            serviceCollection.AddDbContext<ProgrammersBlogContext>(options=>options.UseSqlServer(connectionString));
+            serviceCollection.AddIdentity<User, Role>(options =>
             {
-                //user password setting
-                x.Password.RequireDigit = false;//şifre rakamlı olsun mu(rakam zrounlu degil)
-                x.Password.RequiredLength = 6;//şifre 10karakter
-                x.Password.RequiredUniqueChars = 2;// 2 özel karakter istiyoruz *_- .. gibi
-                x.Password.RequireNonAlphanumeric = false;// @ gibi rakterere gerek yok bak
-                x.Password.RequireLowercase = false;//büyük küçük takılmıyor
-                x.Password.RequireUppercase = false;
-
-                //user username and email setting
-                x.User.AllowedUserNameCharacters= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";//kulanıcı adına bu karakterlere izin veriyoruz
-                x.User.RequireUniqueEmail = true;//aynı mailden başka olmasın
-
-           
-
-
-            } ).AddEntityFrameworkStores<PeaksortContext>();
-
-          
-
-
-
-            serviscollection.AddDbContext<PeaksortContext>();
-            serviscollection.AddScoped<IUnitOfWork, UnitOfWork>();
-            serviscollection.AddScoped<ICategoryService, CategoryManager>();
-            serviscollection.AddScoped<IProductService, ProductManager>();
-            return serviscollection;
+                // User Password Options
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 5;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                // User Username and Email Options
+                options.User.AllowedUserNameCharacters= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+$";
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<ProgrammersBlogContext>();
+            serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
+            serviceCollection.AddScoped<ICategoryService, CategoryManager>();
+            serviceCollection.AddScoped<IArticleService, ArticleManager>();
+            serviceCollection.AddScoped<ICommentService, CommentManager>();
+            return serviceCollection;
         }
     }
 }

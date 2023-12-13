@@ -12,11 +12,12 @@ namespace PeakSort.Core.Utilities.Extensions
         {
             return
                 $"{dateTime.Millisecond}_{dateTime.Second}_{dateTime.Minute}_{dateTime.Hour}_{dateTime.Day}_{dateTime.Month}_{dateTime.Year}";
-        }
 
-        public static string dene(this string a)
-        {
-            return "sezgin";
+            /*
+             * AlperTunga_587_5_38_12_3_10_2020_userAlperTungaResmi.png
+             * JamesBond_601_5_38_12_3_10_2020.png
+             *
+             */
         }
     }
 }

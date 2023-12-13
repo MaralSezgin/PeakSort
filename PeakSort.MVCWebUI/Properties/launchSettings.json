@@ -1,10 +1,10 @@
 ﻿{
   "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
+    "windowsAuthentication": false, 
+    "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:51503",
-      "sslPort": 44377
+      "applicationUrl": "http://localhost:50664",
+      "sslPort": 44328
     }
   },
   "profiles": {
@@ -15,9 +15,8 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "PeakSort.MVCWebUI": {
+    "ProgrammersBlog.Mvc": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
